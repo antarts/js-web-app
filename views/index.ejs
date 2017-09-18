@@ -1,51 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head lang="en">
-  <meta charset="UTF-8">
-  <title>Growthing of Code Life</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="./stylesheets/style.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="./javascripts/vue.min.js"></script>
-  <script src="./javascripts/index.js"></script>
-  <script src="./javascripts/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.bootcss.com/axios/0.16.2/axios.min.js"></script>
-  <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.full.min.js"></script>
-</head>
+<%- include('_head') %>
 
 <body>
   <div id="app">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-            aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">共同成长队</a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#heart-words">不忘初心<span class="sr-only">(current)</span></a></li>
-            <li><a href="#about-me">关于小组</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="https://js.xinshengdaxue.com">新大JS</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
+   <%- include('_nav') %>
+
     <div class="bs-docs-header">
       <div class="container">
         <h1>JavaScript学习</h1>
@@ -217,21 +179,8 @@
       </div>
     </div>
 </body>
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <hr>
-      <div class="col-lg-12">
-        <div class="col-md-8">
-          <a href="https://github.com/antarts/Study_Note"><i class="fa fa-github fa-2x"></i></a>
-        </div>
-        <div class="col-md-4">
-          <p class="muted pull-right">© 2017 Growthing. All rights reserved</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+
+<%- include('_footer') %>
 
 <script>
   // vue官网： https://cn.vuejs.org/v2/guide/
@@ -249,7 +198,7 @@
       myAccount: '',
       myContent: '',
       teamMember: teamMember,
-      message: 'Project: Getting-started-with-javascript #Commits',
+      message: 'Project: Getting-started-with-javascript #Contributions',
       contributors: [],
       contributions: []
     },
@@ -345,7 +294,7 @@
       labels: app.contributors,
       datasets: [
         {
-          label: 'Contributions to master',
+          label: 'Commits',
           backgroundColor: '#fb8532',
           data: app.contributions
         }
