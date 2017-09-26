@@ -14,6 +14,16 @@
       <%- include('_slider') %>
 
       <div class="col-md-8">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ message }}</h3>
+          </div>
+          <div class="panel-body">
+            <bar-chart></bar-chart>
+          </div>
+        </div>
+
         <div class="panel panel-default" id="wordsToTeacher">
           <div class="panel-heading">
             <h3 class="panel-title">有话对老师说</h3>
@@ -40,12 +50,22 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">{{ message }}</h3>
-          </div>
-          <div class="panel-body">
-            <bar-chart></bar-chart>
-          </div>
-        </div>
+            <h3 class="panel-title">他们对老师说</h3>
+         </div>
+         <div class="panel-body markdown-body">
+           <div class="well" v-for="item in contentData">
+               <strong class="pull-left primary-font">{{ item.name }}</strong>
+               <small class="pull-right text-muted">
+                  <span class="glyphicon glyphicon-time"></span> {{ item.create_at }}
+                </small>
+               <hr>
+               <div class="list-unstyled ui-sortable">
+               <div v-html="item.content"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+
 
         <!-- <div class="panel panel-default" id="heart-words">
           <div class="panel-heading">
@@ -93,6 +113,7 @@
       myName: '',
       myAccount: '',
       myContent: '',
+      contentData: [],
       teamMember: teamMember,
       message: 'Project: Getting-started-with-javascript #Contributions',
       contributors: [],
@@ -178,6 +199,16 @@
         .catch(function (error) {
           console.log(error);
         });
+      },
+
+      getContentData: function () {
+        axios.get('https://js.xinshengdaxue.com/api/v1/learnJS/sayToMe')
+          .then(function (response) {
+            app.contentData = response.data.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
 
     }
@@ -204,6 +235,7 @@
   app.getTopics();
   app.getCourseInfo();
   app.getGithubData();
+  app.getContentData();
 
 </script>
 
