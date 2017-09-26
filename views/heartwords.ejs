@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('_head') %>
+
+<body>
+  <div id="app">
+
+   <%- include('_nav') %>
+
+    <%- include('_header') %>
+
+    <div class="container">
+      <%- include('_slider') %>
+
+      <div class="col-md-8">
+        <div class="panel panel-default" id="heart-words">
+          <div class="panel-heading">
+            <h3 class="panel-title">不忘初心</h3>
+          </div>
+          <div class="panel-body">
+            <div class="words-pannel" v-for="item in wordsList">
+
+              <div class="item active">
+                <blockquote>
+                  <div class="row">
+                    <div class="col-sm-3 text-center">
+                      <img class="img-circle" v-bind:src="item.avatar" alt="..." style="width: 125px; height: 125px;">
+                    </div>
+                    <div class="col-sm-9">
+                      <p>{{ item.words }}</p>
+                      <small>{{ item.name }}</small>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+<%- include('_footer') %>
+
+<script>
+  // vue官网： https://cn.vuejs.org/v2/guide/
+  // 初始化Vue
+  var app = new Vue({
+    el: '#app',   // #app 和html中div#id的 app 对应
+    data: {
+      // wordsList: wordsList // 变量wordsList可以在html使用
+      wordsList: [],
+      gitTopics: [],
+      // ppt: [],
+      topics: [],
+      courseInfo: {},
+      // myName: '',
+      // myAccount: '',
+      // myContent: '',
+      teamMember: teamMember
+      // message: 'Project: Getting-started-with-javascript #Contributions',
+      // contributors: [],
+      // contributions: []
+    },
+    methods: {
+      //   getInfo() {
+      //     var that = this;
+      //     $.getJSON("public/all_words.json", function(data) {
+      //       that.wordsList = data;
+      //       })
+      //   }
+      fetchData: function () {
+        axios.get('https://js.xinshengdaxue.com/api/v1/learnJS/course/1/words')
+          .then(function (response) {
+            app.wordsList = response.data.words;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      // sendData: function () {
+      //   var vm = this;
+      //   axios.post('https://js.xinshengdaxue.com/api/v1/learnJS/sayToMe',
+      //     {
+      //       name: app.myName,
+      //       account: app.myAccount,
+      //       content: app.myContent
+      //     })
+      //     .then(function (response) {
+      //       if (response.status === 200 ) {
+      //         app.myName = response.data.name;
+      //         app.myAccount = response.data.account;
+      //         app.myContent = response.data.content;
+      //         alert('send successed!');
+      //         vm.myName = '';
+      //         vm.myAccount = '';
+      //         vm.myContent = '';
+      //       }
+      //       console.log(response);
+      //     })
+      //     .caatch(function (error) {
+      //       console.log(error);
+      //     })
+      // },
+      //
+      // submitData: function () {
+      //   app.sendData();
+      // },
+
+      getTopics: function () {
+        axios.get('https://js.xinshengdaxue.com/api/v1/learnJS/course/1/catelog')
+        .then(function (response) {
+          app.gitTopics = response.data.catelog.gitTopicsList;
+          // app.ppt = response.data.catelog.pptList;
+          app.topics = response.data.catelog.topicsList;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+
+      getCourseInfo: function () {
+        axios.get('https://js.xinshengdaxue.com/api/v1/learnJS/course/1/detail')
+        .then(function (response) {
+          app.courseInfo = response.data.courseInfo;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+
+      // getGithubData: function () {
+      //   var vm = this;
+      //   axios.get('https://api.github.com/repos/xugy0926/getting-started-with-javascript/contributors')
+      //   .then(function (response) {
+      //     // contributors: [];
+      //     // contributions: [];
+      //     for (var i = 0; i < response.data.length; i++) {
+      //       vm.contributors.push(response.data[i].login);
+      //       vm.contributions.push(response.data[i].contributions);
+      //     }
+      //     app.contributors = vm.contributors;
+      //     app.contributions = vm.contributions;
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+      // }
+
+    }
+  });
+
+//   Vue.component('bar-chart', {
+//   extends: VueChartJs.Bar,
+//   mounted () {
+//     this.renderChart({
+//       labels: app.contributors,
+//       datasets: [
+//         {
+//           label: 'Commits',
+//           backgroundColor: '#fb8532',
+//           data: app.contributions
+//         }
+//       ]
+//     }, {responsive: true, maintainAspectRatio: false})
+//   }
+// })
+
+  // app.getInfo();
+  app.fetchData();
+  app.getTopics();
+  app.getCourseInfo();
+  // app.getGithubData();
+
+</script>
+
+</html>
