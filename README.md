@@ -1,6 +1,6 @@
-### Growthing Code Life
+### Javascript 学习成长之路
 
-A javascript project.
+这是一个javascript编写的项目，部署在heroku上。
 
-### WEB
-[visit the web](https://vast-headland-26623.herokuapp.com/)
+### demo
+[查看项目](https://vast-headland-26623.herokuapp.com/)
