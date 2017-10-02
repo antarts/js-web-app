@@ -60,6 +60,16 @@
               <hr>
 
             </div>
+
+            <template>
+               <div class="paination pagination-sm">
+                 <b-pagination align="center" size="md" :total-rows="100" v-model="currentPage" :per-page="10">
+                 </b-pagination>
+                 <br>
+                 <div>当前页:第 {{currentPage}}页</div>
+               </div>
+            </template>
+
           </div>
         </div>
       </div>
@@ -81,7 +91,8 @@
       topics: [],
       courseInfo: {},
       teamMember: teamMember,
-      avatars: []
+      avatars: [],
+      currentPage: 1
     },
     methods: {
       //   getInfo() {
